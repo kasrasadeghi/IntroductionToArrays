@@ -36,24 +36,29 @@ public class BarGraphView implements View<BarGraph>
         // Calculate a few things before we start:
         // The ULC of the bar graph bounding box should be 5% in from the left side of the window
         // and 5% down from the top of the window.  Calculate the x and y coordinates of the ULC
-        
+        int tlx = w/20;
+        int tly = h/20;
         // the total width of the bar graph should be 90% of the width of the window
-        
+        int bgw = (w*9)/10;
         // and the height should be 85% of the height of the window.
-        
+        int bgh = (85*h)/100;
         // get the bars and labels from the bar graph
-        
+        int[] bars = bg.getBars();
         // find the maximum bar height.  Hint: this is an accumulator style for loop.
-        
+        int maxBarHeight = 0;
+        for (int bar : bars) if (bar > maxBarHeight) maxBarHeight = bar;
         // calculate the width of each bar (the width of the bar graph over the number of bars
-        
+        int barWidth = bgw / bars.length;
+        int unit = bgh / maxBarHeight;
         // iterate over the bars array
+        for (int i = 0; i < bars.length; i++) { 
             // the screen height of the bar is the value of the bar * graph height/ max bar height
             
             // draw and outline a rectangle in color
             // you'll need to calculate where the ULC of each bar is based on its screen height
             // and the ULC of the bar graph and the height of the bar graph and the bar number
             // and the width of each bar
+        }
         
         // next draw the labels.
         // get a font using the getFont function in GraphicsUtilityFunctions

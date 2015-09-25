@@ -25,9 +25,9 @@ public class IntroductionToArrays
      */
     public static void main(String[] args)
     {
-        arrayBasicsDemo();
-        //runNameAgeFavoriteColorTableWithArrays();
-        //runBarGraphBasicTest();
+//        arrayBasicsDemo();
+//        runNameAgeFavoriteColorTableWithArrays();
+        runBarGraphBasicTest();
         //runSinBarGraph();
         //runWarAndPeaceLetterFrequency();
         //runWarAndPeaceWordLengthFrequency();
@@ -76,17 +76,19 @@ public class IntroductionToArrays
         // for loops are good for manipulating arrays.  Because the index can be ANY expression
         // that results in an int, you can use a variable to choose which entry/variable you're working with/on:
         // Also, the length of the array is stored in the length field of the array:
-        for ( int i = 0; i < intArray.length; i++ )
-        {
-            System.out.println( "intArray[" + i + "] = " + intArray[i] );
-        }
+//        for ( int i = 0; i < intArray.length; i++ )
+//        {
+//            System.out.println( "intArray[" + i + "] = " + intArray[i] );
+//        }
         
         // *****************
         // EXERCISE IN CLASS
         // *****************
         // write a for loop to initialize the ith element of strArray to be "string<i>"
         // for example, strArray[0] should be "string0"
-        
+        for (int i = 0; i < strArray.length; i++) {
+            strArray[i] = "string" + i;
+        }
         
         // remember that the individual entries have the properties of a non-array variable of that type
         // that is, the elements of strArray, for example, are Strings.  Anything you can do with a normal
@@ -96,10 +98,10 @@ public class IntroductionToArrays
             intArray[i]++;
         }
         
-        for ( int i = 0; i < intArray.length; i++ )
-        {
-            System.out.println( "intArray[" + i + "] = " + intArray[i] );
-        }
+//        for ( int i = 0; i < intArray.length; i++ )
+//        {
+//            System.out.println( "intArray[" + i + "] = " + intArray[i] );
+//        }
         
         // *****************
         // EXERCISE IN CLASS
@@ -113,17 +115,30 @@ public class IntroductionToArrays
         // 1gnirts
         // 0gnirts
         
+        
+        for (int i = strArray.length - 1; i >= 0; i--) {
+            String temp = "";
+            for (int j = strArray[i].length() - 1 ; j >=0; j-- )
+                temp += strArray[i].charAt(j);
+//            System.out.println(temp);
+        }
+        
+        
         // *****************
         // EXERCISE IN CLASS
         // *****************
         
         // write a for loop which appends "Dave" to the end of each of the Strings in strArray
-        
+        for (String e : strArray)
+            e += "Dave";
         // and then a for loop to print out the Strings in strArray to see if it worked
+        for (String e : strArray)
+            System.out.println(e);
     }
     
     public static void runNameAgeFavoriteColorTableWithArrays()
     {
+        Scanner sc = new Scanner(System.in);
         // This program is just like the table with three rows
         // but now you need to prompt the user for how many family members
         // they would like to include in the table.
@@ -134,15 +149,35 @@ public class IntroductionToArrays
         
         // prompt the user for how many family members and read in their answer
         // from the keyboard
+        System.out.println("How many family members?");
+        int peopleNumber = sc.nextInt();
         
         // create three arrays to hold the names (Strings), ages (ints), and favorite colors (Strings)
+        String[] names = new String[peopleNumber];
+        int[] ages = new int[peopleNumber];
+        String[] colors = new String[peopleNumber];
+        String t = "\t\t";
         
         // use a loop to prompt the user for each person's name, age and favorite color
+        for (int i = 0; i <peopleNumber; ++i) {
+            
+            System.out.println( "Enter family member number " + (i+1) + "'s name:");
+            names[i] = sc.next();
+            
+            System.out.println( "Enter " + names[i] + "'s age:");
+            ages[i] = sc.nextInt();
+            
+            System.out.println( "Enter " + names[i] + "'s favourite color:");
+            colors[i] = sc.next();
+        }
         
         // print out the table headers
-        
+        System.out.println( "Name" +t+ "Age" +t+ "Favorite Color \n"
+                + "=====================================================");
         // use a loop to print out the table
-        
+        for (int j = 0; j<peopleNumber; ++j) {
+            System.out.println( names[j] +t+ ages[j] +t+ colors[j]);
+        }
     }
     
     public static void runBarGraphBasicTest()
@@ -151,13 +186,24 @@ public class IntroductionToArrays
         // should increase from left to right from 1 to 19.  The odd-indexed
         // entries should decrease from left to right from 20 to 2
         // That is the first few entries should be 1, 20, 3, 18, 5, 16 ...
-        
+        int[] bars = new int[20];
+//        System.out.print("{ ");
+        for (int i = 0; i < 20; i++) {
+            if (i%2 == 0) 
+                bars[i] = i+1;
+            else bars[i] = 21 - i;
+//            if (i == 19) System.out.print(evenOddArray[i]);
+//            else System.out.print(evenOddArray[i] + ", ");
+        }
+//        System.out.println(" }");
         // declare and create an array of 20 Strings.  The strings should be
         // the numbers from 0 to 19 ("0", "1", etc)
-        
+        String[] labels = new String[20];
+        for (int i = 0; i < 20; i++) 
+            labels[i] = Integer.toString(i);
         // uncomment these lines when you have done everything above
-        //BarGraph bg = new BarGraph( bars, labels );
-        //new CVMProgram( "Bar Graph Basic Test", 800, 600, new DefaultControl<>(), new BarGraphView(), bg ).start();
+        BarGraph bg = new BarGraph( bars, labels );
+        new CVMProgram( "Bar Graph Basic Test", 800, 600, new DefaultControl<>(), new BarGraphView(), bg ).start();
         
         // uncomment this line when you have done the cummulative exercise        
         //runCummulative( "Bar Graph Basic Test", bg );

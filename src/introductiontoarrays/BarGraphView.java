@@ -44,33 +44,68 @@ public class BarGraphView implements View<BarGraph>
         int bgh = (85*h)/100;
         // get the bars and labels from the bar graph
         int[] bars = bg.getBars();
+        String[] labels = bg.getLabels();
         // find the maximum bar height.  Hint: this is an accumulator style for loop.
-        int maxBarHeight = 0;
+        int maxBarHeight = 1;
         for (int bar : bars) if (bar > maxBarHeight) maxBarHeight = bar;
         // calculate the width of each bar (the width of the bar graph over the number of bars
         int barWidth = bgw / bars.length;
         int unit = bgh / maxBarHeight;
+        
+        int bly = tly + bgh;
         // iterate over the bars array
         for (int i = 0; i < bars.length; i++) { 
             // the screen height of the bar is the value of the bar * graph height/ max bar height
-            
             // draw and outline a rectangle in color
             // you'll need to calculate where the ULC of each bar is based on its screen height
             // and the ULC of the bar graph and the height of the bar graph and the bar number
             // and the width of each bar
+            
+            g.setColor( Color.BLUE );
+            g.fillRect(tlx + i *  barWidth, bly - bars[i] * unit, barWidth, bars[i] * unit);
+            g.setColor( Color.BLACK );
+            g.drawRect(tlx + i *  barWidth, bly - bars[i] * unit, barWidth, bars[i] * unit);
+//            g.fillRect(w/2, h/2, 50, 50);
+            
         }
         
         // next draw the labels.
         // get a font using the getFont function in GraphicsUtilityFunctions
         // the height of the font should be 5% of the height of the window
-        
+        Font font = GraphicsUtilityFunctions.getFont(h/20);
+        for (int i = 0; i < labels.length; i++ )
+            GraphicsUtilityFunctions.drawStringWithFontInRectangle(g, 
+                    labels[i], 
+                    font, 
+                    tlx + i * barWidth, 
+                    bly, 
+                    barWidth, 
+                    h/20);
         // for each label in the labels array
             // use the drawStringWithFontInRectangle to draw the label in a rectangle
             // below the corresponding bar
         
         // finally, use the Mouse class to get the x and y coordinates of the mouse cursor
-        
+        int mx = Mouse.getX();
+        int my = Mouse.getY();
         // figure out which bar the mouse is on (use the x-coordinate)
+        int mouseBarHover = -1;
+        for (int i = 0; i < bars.length; i++ ) {
+            if ( mx >= tlx + i *  barWidth && mx <= tlx + i *  barWidth + barWidth) {
+                mouseBarHover = i;
+                if ( my >= bly - bars[i] * unit && my <= bly ) {
+                    g.setColor( Color.YELLOW);
+                    g.fillRect(mx, my, 100, h/20);
+                    g.setColor ( Color.BLACK);
+                    g.drawRect(mx, my, 100, h/20);
+                    String tooltip = labels[i] + ": " + bars[i];
+                    GraphicsUtilityFunctions.drawStringWithFontInRectangle(g, tooltip, font, mx, my, 100, h/20);
+                }
+            }
+                
+        }
+//        System.out.println("mouseBarHover Testing: " + mouseBarHover);
+        
         
         // and see if the mouse is over the bar (get the distance from the base line to the mouse cursor)
         

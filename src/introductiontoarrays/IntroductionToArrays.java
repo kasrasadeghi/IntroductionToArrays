@@ -27,9 +27,9 @@ public class IntroductionToArrays
     {
 //        arrayBasicsDemo();
 //        runNameAgeFavoriteColorTableWithArrays();
-        runBarGraphBasicTest();
-        //runSinBarGraph();
-        //runWarAndPeaceLetterFrequency();
+//        runBarGraphBasicTest();
+        runSinBarGraph();
+//        runWarAndPeaceLetterFrequency();
         //runWarAndPeaceWordLengthFrequency();
         //runDiceDistribution();
     }
@@ -187,15 +187,12 @@ public class IntroductionToArrays
         // entries should decrease from left to right from 20 to 2
         // That is the first few entries should be 1, 20, 3, 18, 5, 16 ...
         int[] bars = new int[20];
-//        System.out.print("{ ");
         for (int i = 0; i < 20; i++) {
             if (i%2 == 0) 
                 bars[i] = i+1;
             else bars[i] = 21 - i;
-//            if (i == 19) System.out.print(evenOddArray[i]);
-//            else System.out.print(evenOddArray[i] + ", ");
         }
-//        System.out.println(" }");
+
         // declare and create an array of 20 Strings.  The strings should be
         // the numbers from 0 to 19 ("0", "1", etc)
         String[] labels = new String[20];
@@ -213,14 +210,16 @@ public class IntroductionToArrays
     public static void runSinBarGraph()
     {
         // create an array of 50 ints.  all of them should be 1.
-        
+        int[] ones = new int[50];
+        for ( int one : ones) one = 1;
         
         // create an array of 50 Strings.  All of them should be "";
-        
+        String[] emptyStrings = new String[50];
+        for ( int i = 0; i < 50; i++) emptyStrings[i] = "";
         
         // uncomment when you have done the above
-        //BarGraph bg = new BarGraph( bars, labels );
-        //new CVMProgram( "Sine Wave", 800, 600, new SineWaveBarGraphController(), new BarGraphView(), bg ).start();
+        BarGraph bg = new BarGraph( ones, emptyStrings );
+        new CVMProgram( "Sine Wave", 800, 600, new SineWaveBarGraphController(), new BarGraphView(), bg ).start();
         
         // uncomment if you have done the cummulative bonus exercise
         //runCummulative( "Sine Wave", bg );
@@ -233,13 +232,19 @@ public class IntroductionToArrays
             // open an input stream to the war and peace file
             Scanner wap = new Scanner( new File( "War and Peace.txt" ) );
             
-            // create an array of 26 ints.  Leave each one set to 0
+            // create an array of 26 ints.  Leave each one set to 0.
+            int[] letterFreqs = new int[26];
             
             // use a for loop to read words from WAP
             for ( ; wap.hasNext(); )
             {
                 // get the next word from the file
-                
+                String nextWord = wap.next().toLowerCase();
+                for (int i = 0; i < nextWord.length(); i++) {
+                    char temp = nextWord.charAt(i);
+                    if (Character.isLetter(temp))
+                        letterFreqs[temp - 'a'] +=1;
+                }
                 // traverse the letters in the word.  If you see an 'a' or an 'A'
                 // increase the first entry in letterFreqs by 1.  If you see a 'b' or a 'B'
                 // increase the second entry etc.
@@ -250,21 +255,22 @@ public class IntroductionToArrays
                 // (there are functions in the Character class that accomplish these tasks)
                 
             }
-            
+            for (int freq : letterFreqs) System.out.println(freq);
             // declare and create and initialize an array of 26 Strings.  The first entry should be "A"
             // the second should be "B" etc.
-            
-            
+            String[] alphabet = new String[26];
+            for( int i = 0; i < 26; i++)
+                alphabet[i] = String.valueOf((char)('A' + i));
             // uncomment the block below when you have done everything above
-            /*
-            BarGraph bg = new BarGraph( letterFreqs, labels );
+            
+            BarGraph bg = new BarGraph( letterFreqs, alphabet );
             
             new CVMProgram( "War and Peace Letter Frequencies", 800, 600,
                     new DefaultControl<>(),
                     new BarGraphView(),
                     bg
             ).start();
-            */
+            
             
             // uncomment the line below when you have done the cummulative exercise
             // runCummulative( "War and Peace Letter Frequencies", bg );

@@ -28,8 +28,8 @@ public class IntroductionToArrays
 //        arrayBasicsDemo();
 //        runNameAgeFavoriteColorTableWithArrays();
 //        runBarGraphBasicTest();
-        runSinBarGraph();
-//        runWarAndPeaceLetterFrequency();
+//        runSinBarGraph();
+        runWarAndPeaceLetterFrequency();
         //runWarAndPeaceWordLengthFrequency();
         //runDiceDistribution();
     }
@@ -255,12 +255,14 @@ public class IntroductionToArrays
                 // (there are functions in the Character class that accomplish these tasks)
                 
             }
-            for (int freq : letterFreqs) System.out.println(freq);
+            
             // declare and create and initialize an array of 26 Strings.  The first entry should be "A"
             // the second should be "B" etc.
             String[] alphabet = new String[26];
             for( int i = 0; i < 26; i++)
                 alphabet[i] = String.valueOf((char)('A' + i));
+            for (int i = 0; i < 26; i++)
+                System.out.println(alphabet[i] + ": " + letterFreqs[i]);
             // uncomment the block below when you have done everything above
             
             BarGraph bg = new BarGraph( letterFreqs, alphabet );

@@ -50,7 +50,6 @@ public class BarGraphView implements View<BarGraph>
         for (int bar : bars) if (bar > maxBarHeight) maxBarHeight = bar;
         // calculate the width of each bar (the width of the bar graph over the number of bars
         int barWidth = bgw / bars.length;
-        int unit = bgh / maxBarHeight;
         
         int bly = tly + bgh;
         // iterate over the bars array
@@ -62,9 +61,9 @@ public class BarGraphView implements View<BarGraph>
             // and the width of each bar
             
             g.setColor( Color.BLUE );
-            g.fillRect(tlx + i *  barWidth, bly - bars[i] * unit, barWidth, bars[i] * unit);
+            g.fillRect(tlx + i *  barWidth, bly - bars[i] * bgh / maxBarHeight, barWidth, bars[i] * bgh / maxBarHeight);
             g.setColor( Color.BLACK );
-            g.drawRect(tlx + i *  barWidth, bly - bars[i] * unit, barWidth, bars[i] * unit);
+            g.drawRect(tlx + i *  barWidth, bly - bars[i] * bgh / maxBarHeight, barWidth, bars[i] * bgh / maxBarHeight);
 //            g.fillRect(w/2, h/2, 50, 50);
             
         }
@@ -93,7 +92,7 @@ public class BarGraphView implements View<BarGraph>
         for (int i = 0; i < bars.length; i++ ) {
             if ( mx >= tlx + i *  barWidth && mx <= tlx + i *  barWidth + barWidth) {
                 mouseBarHover = i;
-                if ( my >= bly - bars[i] * unit && my <= bly ) {
+                if ( my >= bly - bars[i] * bgh / maxBarHeight && my <= bly ) {
                     g.setColor( Color.YELLOW);
                     g.fillRect(mx, my, 100, h/20);
                     g.setColor ( Color.BLACK);

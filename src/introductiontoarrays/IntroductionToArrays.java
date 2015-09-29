@@ -29,9 +29,9 @@ public class IntroductionToArrays
 //        runNameAgeFavoriteColorTableWithArrays();
 //        runBarGraphBasicTest();
 //        runSinBarGraph();
-        runWarAndPeaceLetterFrequency();
-        //runWarAndPeaceWordLengthFrequency();
-        //runDiceDistribution();
+//        runWarAndPeaceLetterFrequency();
+//        runWarAndPeaceWordLengthFrequency();
+//        runDiceDistribution();
     }
     
     public static void arrayBasicsDemo()
@@ -203,7 +203,7 @@ public class IntroductionToArrays
         new CVMProgram( "Bar Graph Basic Test", 800, 600, new DefaultControl<>(), new BarGraphView(), bg ).start();
         
         // uncomment this line when you have done the cummulative exercise        
-        //runCummulative( "Bar Graph Basic Test", bg );
+        runCummulative( "Bar Graph Basic Test", bg );
                 
     }
     
@@ -222,7 +222,7 @@ public class IntroductionToArrays
         new CVMProgram( "Sine Wave", 800, 600, new SineWaveBarGraphController(), new BarGraphView(), bg ).start();
         
         // uncomment if you have done the cummulative bonus exercise
-        //runCummulative( "Sine Wave", bg );
+        runCummulative( "Sine Wave", bg );
     }
     
     public static void runWarAndPeaceLetterFrequency() 
@@ -261,8 +261,8 @@ public class IntroductionToArrays
             String[] alphabet = new String[26];
             for( int i = 0; i < 26; i++)
                 alphabet[i] = String.valueOf((char)('A' + i));
-            for (int i = 0; i < 26; i++)
-                System.out.println(alphabet[i] + ": " + letterFreqs[i]);
+//            for (int i = 0; i < 26; i++)
+//                System.out.println(alphabet[i] + ": " + letterFreqs[i]);
             // uncomment the block below when you have done everything above
             
             BarGraph bg = new BarGraph( letterFreqs, alphabet );
@@ -275,7 +275,7 @@ public class IntroductionToArrays
             
             
             // uncomment the line below when you have done the cummulative exercise
-            // runCummulative( "War and Peace Letter Frequencies", bg );
+             runCummulative( "War and Peace Letter Frequencies", bg );
         } 
         catch (FileNotFoundException ex)
         {
@@ -293,32 +293,43 @@ public class IntroductionToArrays
             // find the length of the longest word in the file
             // Hint: this is an accumulator style for loop
             
+            int maxWordLength = 0;
+            while ( wap.hasNext()) {
+                int tempLength = wap.next().length();
+                if ( tempLength > maxWordLength )
+                    maxWordLength = tempLength;
+            }
+//            System.out.println("max word length is: " + maxWordLength);
             // declare and create an array to hold frequencies of word lengths
             // it should have an entry for every possible word length in the file
             // (1 ... maxWordLength)
-            
+            String [] labels = new String[maxWordLength];
+            for (int i = 1; i <= maxWordLength; ++i) {
+                labels[i - 1] = i + "";
+            }
             // create a new scanner so you can re-scan the file
-            
+            Scanner warAndPeace = new Scanner( new File( "War and Peace.txt" ));
             // run through all the words again, counting how many of each length word there are
             // That is, at the end of this loop wordLengthFreqs[0] should contain the number
             // of words that had length 1, wordLengthFreqs[1] should contains the number
             // of words that had length 2 etc.
-            
-            // create an array of Strings to label your bars (the first entry should be "1",
-            // the second should be "2" etc.)
+            int [] wordLengthFreqs = new int[maxWordLength];
+            while ( warAndPeace.hasNext()) {
+                wordLengthFreqs[warAndPeace.next().length() - 1]++;
+            }
 
             // uncomment the block below when you have done everything above
-            /*
+            
             BarGraph bg = new BarGraph( wordLengthFreqs, labels );
             new CVMProgram( "War and Peace Letter Frequencies", 800, 600,
                     new DefaultControl<>(),
                     new BarGraphView(),
                     bg
             ).start();
-            */
+            
             
             // uncomment if you have done the cummulative bonus exercise
-            //runCummulative( "War and Peace Letter Frequencies", bg );
+            runCummulative( "War and Peace Letter Frequencies", bg );
         } 
         catch (FileNotFoundException ex)
         {
@@ -333,17 +344,27 @@ public class IntroductionToArrays
         // roll 3 dice 10000 times.  Use the frequencies array to keep track of how often
         // each sum (3 - 18) is rolled.
         // To roll a die, use (int)(Math.random() * 6 + 1)
-        
+        int [] rollFreqs = new int[16];
+        for (int i = 0; i < 10000; i++) {
+            rollFreqs[(int)(Math.random() * 6 + 1)
+                    + (int)(Math.random() * 6 + 1)
+                    + (int)(Math.random() * 6 + 1)
+                    - 3]++;
+        }
         
         // create an array of 16 Strings to label the graph. ("3" ... "18")
+        String [] labels = new String[16];
+        for (int i = 3; i <= 18; ++i) 
+            labels[i - 3] = i + "";
         
-        
+//        for (int i = 0; i < 16; i++)
+//            System.out.println(labels[i] + ": " + rollFreqs[i]);
         // uncomment the lines below when you have done everything above
-        //BarGraph bg = new BarGraph( rollFreqs, labels );
-        //new CVMProgram( "3 Dice Sum Frequencies", 800, 600, new DefaultControl(), new BarGraphView(), bg ).start();
+        BarGraph bg = new BarGraph( rollFreqs, labels );
+        new CVMProgram( "3 Dice Sum Frequencies", 800, 600, new DefaultControl(), new BarGraphView(), bg ).start();
         
         // uncomment if you have done the cummulative exercise
-        //runCummulative( "3 Dice Sum Frequencies", bg );
+        runCummulative( "3 Dice Sum Frequencies", bg );
     }
     
     public static void runCummulative( String s, BarGraph bg )

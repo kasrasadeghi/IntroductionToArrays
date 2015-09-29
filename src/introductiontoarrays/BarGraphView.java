@@ -60,7 +60,7 @@ public class BarGraphView implements View<BarGraph>
             // and the ULC of the bar graph and the height of the bar graph and the bar number
             // and the width of each bar
             
-            g.setColor( Color.BLUE );
+            g.setColor( color );
             g.fillRect(tlx + i *  barWidth, bly - bars[i] * bgh / maxBarHeight, barWidth, bars[i] * bgh / maxBarHeight);
             g.setColor( Color.BLACK );
             g.drawRect(tlx + i *  barWidth, bly - bars[i] * bgh / maxBarHeight, barWidth, bars[i] * bgh / maxBarHeight);

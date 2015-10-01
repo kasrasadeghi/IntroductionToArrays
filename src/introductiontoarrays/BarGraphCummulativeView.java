@@ -5,8 +5,6 @@
  */
 package introductiontoarrays;
 
-import apcscvm.CVMProgram;
-import apcscvm.DefaultControl;
 import apcscvm.View;
 import java.awt.Color;
 import java.awt.Graphics;

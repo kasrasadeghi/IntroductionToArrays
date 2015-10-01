@@ -46,7 +46,7 @@ public class BarGraphView implements View<BarGraph>
         int[] bars = bg.getBars();
         String[] labels = bg.getLabels();
         // find the maximum bar height.  Hint: this is an accumulator style for loop.
-        int maxBarHeight = 1;
+        int maxBarHeight = 0;
         for (int bar : bars) if (bar > maxBarHeight) maxBarHeight = bar;
         // calculate the width of each bar (the width of the bar graph over the number of bars
         int barWidth = bgw / bars.length;

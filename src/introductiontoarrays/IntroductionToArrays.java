@@ -29,9 +29,9 @@ public class IntroductionToArrays
 //        runNameAgeFavoriteColorTableWithArrays();
 //        runBarGraphBasicTest();
 //        runSinBarGraph();
-//        runWarAndPeaceLetterFrequency();
+        runWarAndPeaceLetterFrequency();
 //        runWarAndPeaceWordLengthFrequency();
-        runDiceDistribution();
+//        runDiceDistribution();
     }
     
     public static void arrayBasicsDemo()

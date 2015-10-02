@@ -31,7 +31,7 @@ public class IntroductionToArrays
 //        runSinBarGraph();
 //        runWarAndPeaceLetterFrequency();
 //        runWarAndPeaceWordLengthFrequency();
-//        runDiceDistribution();
+        runDiceDistribution();
     }
     
     public static void arrayBasicsDemo()

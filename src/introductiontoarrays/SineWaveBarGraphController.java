@@ -39,7 +39,7 @@ public class SineWaveBarGraphController extends DefaultControl<BarGraph>
                     200 
                   + 100*sin((2 * (i+t) + PI) / n)  
                   + 50*sin(((i+t) * PI * sqrt(5))/n)  
-                  + 100*sin(((i+t) * PI * sqrt(10))/n)
+                  + 25*sin(((i+t) * PI * sqrt(10))/n)
                     );
         }
     }
